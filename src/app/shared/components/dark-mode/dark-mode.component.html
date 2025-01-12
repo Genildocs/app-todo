@@ -1,0 +1,20 @@
+<div>
+  <button (click)="darkMode()">
+    <div
+      class="hidden p-2 dark:flex items-center rounded-full bg-gray-300 hover:bg-gray-200 transition-all"
+    >
+      <i-feather
+        name="moon"
+        class="hover:!text-blue-600 transition-all"
+      ></i-feather>
+    </div>
+    <div
+      class="dark:hidden bg-gray-200 p-2 flex items-center hover:bg-gray-300 rounded-full transition-all"
+    >
+      <i-feather
+        name="sun"
+        class="hover:!text-yellow-600 transition-all"
+      ></i-feather>
+    </div>
+  </button>
+</div>
