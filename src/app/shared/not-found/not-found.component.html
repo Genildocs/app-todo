@@ -1,3 +1,19 @@
-<div>
-  <h5>Erro 404! Page not Found</h5>
+<div class="h-full flex items-center justify-center">
+  <div>
+    <div>
+      <svg-icon
+        src="assets/404.svg"
+        name="page not found"
+        [svgStyle]="{ width: '100%', height: '100%' }"
+      ></svg-icon>
+    </div>
+    <div class="text-center">
+      <h5 class="mb-2">The page you requested was not found!</h5>
+      <a
+        routerLink="/home"
+        class="bg-green-600 p-2 text-white hover:bg-green-500"
+        >Go Home</a
+      >
+    </div>
+  </div>
 </div>

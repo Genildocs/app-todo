@@ -8,4 +8,8 @@
   body {
     @apply h-full font-josefin bg-white dark:bg-[#050505c4] dark:text-white;
   }
+
+  body {
+    @apply bg-[url('/assets/bg-light.png')] dark:bg-[url('/assets/bg-dark.jpg')] bg-no-repeat md:bg-contain z-10;
+  }
 }
