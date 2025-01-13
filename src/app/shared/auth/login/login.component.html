@@ -1,1 +1,80 @@
-<p>login works!</p>
+<div class="h-full w-full flex items-center justify-center bg-gradient">
+  <div
+    class="relative w-full max-w-[700px] rounded-md bg-[linear-gradient(45deg,#fff9f9_0%,rgba(255,255,255,0)_25%,rgba(255,255,255,0)_75%,_#fff9f9_100%)] p-2 dark:bg-[linear-gradient(52.22deg,#0E1726_0%,rgba(14,23,38,0)_18.66%,rgba(14,23,38,0)_51.04%,rgba(14,23,38,0)_80.07%,#0E1726_100%)]"
+  >
+    <div
+      class="relative flex flex-col justify-center rounded-md bg-white/60 px-6 py-20 backdrop-blur-lg dark:bg-black/50 lg:min-h-[500px]"
+    >
+      <div class="mx-auto w-full max-w-[440px]">
+        <div class="mb-10">
+          <h1
+            class="text-3xl font-extrabold uppercase md:text-4xl text-blue-500"
+          >
+            Sign in
+          </h1>
+          <p class="text-base font-bold leading-normal opacity-70">
+            Enter your email and password to login
+          </p>
+        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+          <div>
+            <label for="email" class="block font-semibold mb-2 opacity-70"
+              >Email</label
+            >
+            <div class="relative">
+              <input
+                formControlName="email"
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                class="form-input ps-10"
+              />
+              <span class="absolute start-4 top-1/2 -translate-y-1/2">
+                <i-feather
+                  name="mail"
+                  style="color: rgb(161, 160, 159)"
+                  class="!h-[18px] !w-[18px] !fill-none"
+                ></i-feather>
+              </span>
+            </div>
+          </div>
+          <div class="mt-5">
+            <label for="password" class="block font-semibold mb-2 opacity-70"
+              >Password</label
+            >
+            <div class="relative">
+              <input
+                formControlName="password"
+                id="password"
+                type="password"
+                placeholder="Enter your password"
+                class="form-input ps-10"
+              />
+              <span class="absolute start-4 top-1/2 -translate-y-1/2">
+                <i-feather
+                  name="lock"
+                  style="color: rgb(161, 160, 159)"
+                  class="!h-[18px] !w-[18px] !fill-none"
+                ></i-feather>
+              </span>
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-gradient my-8 w-full uppercase border-0 shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]"
+          >
+            Sign in
+          </button>
+        </form>
+        <div class="text-center opacity-70">
+          Don't have an account ?
+          <a
+            routerLink="/auth/register"
+            class="text-blue-600 underline hover:text-black uppercase transition-all"
+            >Sign up</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
