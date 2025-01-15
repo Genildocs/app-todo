@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthResponse, User } from '../interfaces/auth';
 import { map, Observable } from 'rxjs';
-
+import {jwtDecode} from 'jwt-decode';
 @Injectable({
   providedIn: 'root',
 })
@@ -23,5 +23,14 @@ export class AuthService {
           return res;
         })
       );
+  }
+
+  getUserScopes():string[]{
+    const token = localStorage.getItem('token');
+
+    if(!token) return []
+
+    const decodeToken: any = jwtDecode(token)
+    return decodeToken
   }
 }

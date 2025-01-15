@@ -6,6 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { DarkModeComponent } from './dark-mode/dark-mode.component';
 import { IconsModule } from '../../icons/icons/icons.module';
 import { ProfileComponent } from './profile/profile.component';
+import { FooterComponent } from './footer/footer.component';
 @NgModule({
   declarations: [
     TodoSideBarComponent,
@@ -13,6 +14,7 @@ import { ProfileComponent } from './profile/profile.component';
     HeaderComponent,
     DarkModeComponent,
     ProfileComponent,
+    FooterComponent,
   ],
   imports: [CommonModule, IconsModule],
   exports: [
