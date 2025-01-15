@@ -17,7 +17,15 @@
           </p>
         </div>
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
-          <div>
+          <div
+            [ngClass]="
+              isSubmited
+                ? loginForm.controls['email'].errors
+                  ? 'has-error'
+                  : 'has-success'
+                : ''
+            "
+          >
             <label for="email" class="block font-semibold mb-2 opacity-70"
               >Email</label
             >
@@ -37,8 +45,23 @@
                 ></i-feather>
               </span>
             </div>
+
+            <ng-container
+              *ngIf="isSubmited && loginForm.controls['email'].errors"
+            >
+              <p class="mt-1 text-red-500">Please fill the Email</p>
+            </ng-container>
           </div>
-          <div class="mt-5">
+          <div
+            class="mt-5"
+            [ngClass]="
+              isSubmited
+                ? loginForm.controls['password'].errors
+                  ? 'has-error'
+                  : 'has-success'
+                : ''
+            "
+          >
             <label for="password" class="block font-semibold mb-2 opacity-70"
               >Password</label
             >
@@ -58,10 +81,16 @@
                 ></i-feather>
               </span>
             </div>
+            <ng-container
+              *ngIf="isSubmited && loginForm.controls['password'].errors"
+            >
+              <p class="mt-1 text-red-500">Please fill the Password</p>
+            </ng-container>
           </div>
           <button
             type="submit"
             class="btn btn-gradient my-8 w-full uppercase border-0 shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]"
+            (click)="onSubmit()"
           >
             Sign in
           </button>

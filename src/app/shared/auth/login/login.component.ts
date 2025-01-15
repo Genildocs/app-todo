@@ -9,6 +9,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  isSubmited: boolean = false;
   private _fb = inject(FormBuilder);
   private _router = inject(Router);
   constructor(private authService: AuthService) {
@@ -18,12 +19,11 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.onSubmit();
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
     if (this.loginForm.valid) {
+      this.isSubmited = true;
       this.authService.login(this.loginForm.value).subscribe({
         next: (res) => {
           this._router.navigate(['/home']);
@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
         },
       });
     } else {
+      this.isSubmited = true;
       console.log('Formulario invalido');
     }
   }
