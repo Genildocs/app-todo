@@ -10,6 +10,7 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   isSubmited: boolean = false;
+  CREDENTIALS_ERROR: number = 401;
   private _fb = inject(FormBuilder);
   private _router = inject(Router);
   constructor(private authService: AuthService) {
@@ -29,12 +30,17 @@ export class LoginComponent implements OnInit {
           this._router.navigate(['/home']);
         },
         error: (err) => {
-          console.log(err);
+          if (err.status === this.CREDENTIALS_ERROR) {
+            console.log('Sim é 401');
+          }
         },
       });
     } else {
       this.isSubmited = true;
-      console.log('Formulario invalido');
+      setTimeout(() => {
+        this.isSubmited = false;
+      }, 5000);
+      console.log(this.loginForm);
     }
   }
 }

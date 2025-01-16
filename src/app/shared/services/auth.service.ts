@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthResponse, User } from '../interfaces/auth';
 import { map, Observable } from 'rxjs';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 @Injectable({
   providedIn: 'root',
 })
@@ -25,12 +25,38 @@ export class AuthService {
       );
   }
 
-  getUserScopes():string[]{
+  verifyToken(): Observable<{ valid: boolean }> {
     const token = localStorage.getItem('token');
 
-    if(!token) return []
+    if (!token) {
+      throw new Error('Token não existe!');
+    }
 
-    const decodeToken: any = jwtDecode(token)
-    return decodeToken
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+
+    return this._httpClient.get<{ valid: boolean }>(
+      `${this.urlApi}/api/users`,
+      { headers }
+    );
+  }
+
+  logout() {
+    if (localStorage.getItem('token')) localStorage.removeItem('token');
+  }
+
+  getUserScopes(): string[] {
+    const token = localStorage.getItem('token');
+
+    if (!token) return [];
+
+    const decodeToken: any = jwtDecode(token);
+    return decodeToken;
+  }
+
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem('token');
+    if (!token) return false;
+    const isLoggedIn = token;
+    return !!isLoggedIn;
   }
 }

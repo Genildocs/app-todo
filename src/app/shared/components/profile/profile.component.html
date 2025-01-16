@@ -1,5 +1,49 @@
 <div
-  class="p-2 rounded-full bg-slate-300 flex items-center justify-center w-10 h-10"
+  class="p-2 rounded-full bg-slate-300 w-10 h-10 cursor-pointer relative"
+  (click)="toggleProfile()"
 >
-  <h2 class="text-lg">R</h2>
+  <div>
+    <h2 class="text-lg text-center">
+      {{ userEmail | slice : 0 : 1 | uppercase }}
+    </h2>
+  </div>
+  <div
+    class="absolute p-3 rounded-md bg-white dark:bg-blue-950 border-[1px] border-solid border-gray-300 shadow-2xl top-[120%] right-3 w-[200px]"
+    *ngIf="isVisible"
+  >
+    <div class="p-1">
+      <span class="text-sm dark:text-white"
+        >Welcome {{ userEmail | slice : 0 : 1 | uppercase
+        }}{{ userEmail | slice : 1 : 7 }}!</span
+      >
+    </div>
+    <ul>
+      <li>
+        <a
+          class="flex items-center gap-2 text-sm font-semibold text-black dark:text-white hover:bg-blue-100 hover:text-blue-400 p-1"
+        >
+          <i-feather name="user" class="!h-[18px] !w-[18px]"></i-feather>
+          Profile</a
+        >
+      </li>
+      <li>
+        <a
+          class="flex items-center gap-2 text-sm font-semibold text-black dark:text-white hover:bg-blue-100 hover:text-blue-400 p-1"
+        >
+          <i-feather name="settings" class="!h-[18px] !w-[18px]"></i-feather>
+          Settings</a
+        >
+      </li>
+      <hr />
+      <li>
+        <a
+          class="flex items-center gap-2 text-sm font-semibold text-red-500 hover:bg-blue-100 hover:text-blue-400 p-1 mt-1"
+          (click)="singOut()"
+        >
+          <i-feather name="log-out" class="!h-[18px] !w-[18px]"></i-feather>
+          Sign Out
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>
