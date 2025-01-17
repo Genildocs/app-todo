@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthResponse, User } from '../interfaces/auth';
+import { AuthResponse, User, RegisterUser } from '../interfaces/auth';
 import { map, Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 @Injectable({
@@ -11,7 +11,14 @@ export class AuthService {
   private urlApi = 'https://notesback-bzcn.onrender.com';
 
   constructor() {}
-
+  register(register: RegisterUser[]): Observable<RegisterUser> {
+    return this._httpClient.post<RegisterUser>(
+      `${this.urlApi}/api/users/register`,
+      {
+        ...register,
+      }
+    );
+  }
   login(user: User[]): Observable<AuthResponse> {
     return this._httpClient
       .post<AuthResponse>(`${this.urlApi}/api/users/login`, {
@@ -49,7 +56,7 @@ export class AuthService {
 
     if (!token) return [];
 
-    const decodeToken: any = jwtDecode(token);
+    const decodeToken: string[] = jwtDecode(token);
     return decodeToken;
   }
 }
