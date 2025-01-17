@@ -10,9 +10,12 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   isSubmited: boolean = false;
-  CREDENTIALS_ERROR: number = 401;
+  loading: boolean = false;
+  CREDENTIALS_ERROR: boolean = false;
+
   private _fb = inject(FormBuilder);
   private _router = inject(Router);
+
   constructor(private authService: AuthService) {
     this.loginForm = this._fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -25,13 +28,16 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if (this.loginForm.valid) {
       this.isSubmited = true;
+      this.loading = true;
       this.authService.login(this.loginForm.value).subscribe({
         next: (res) => {
           this._router.navigate(['/home']);
         },
         error: (err) => {
-          if (err.status === this.CREDENTIALS_ERROR) {
-            console.log('Sim é 401');
+          this.isSubmited = false;
+          this.loading = false;
+          if (err.status === 401) {
+            this.CREDENTIALS_ERROR = true;
           }
         },
       });

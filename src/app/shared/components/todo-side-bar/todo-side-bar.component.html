@@ -1,5 +1,55 @@
-<section class="p-2 bg-white shadow-lg dark:bg-blue-950">
-  <div>
+<section class="p-5 bg-white shadow-lg dark:bg-blue-950 rounded-md">
+  <div class="mb-2 flex items-center gap-2">
+    <i-feather name="book" class="!h-[20px] !w-[20px]"></i-feather>
     <h2 class="text-xl font-semibold">Todo list</h2>
+  </div>
+  <hr />
+  <div class="mt-2">
+    <div class="btn-links-todo">
+      <button class="flex items-center justify-between w-full">
+        <div>
+          <i-feather name="Inbox" class="!h-[18px] !w-[18px]"></i-feather>
+          <span>Inbox</span>
+        </div>
+        <div>
+          <span>1</span>
+        </div>
+      </button>
+      <button class="flex items-center justify-between w-full">
+        <div>
+          <i-feather name="thumbs-up" class="!h-[18px] !w-[18px]"></i-feather>
+          <span class="links-todo">Done</span>
+        </div>
+        <div>
+          <span>1</span>
+        </div>
+      </button>
+      <button class="flex items-center justify-between w-full">
+        <div>
+          <i-feather name="star" class="!h-[18px] !w-[18px]"></i-feather>
+          <span>Important</span>
+        </div>
+        <div>
+          <span>1</span>
+        </div>
+      </button>
+      <button class="flex items-center justify-between w-full">
+        <div>
+          <i-feather name="trash" class="!h-[18px] !w-[18px]"></i-feather>
+          <span>Trash</span>
+        </div>
+        <div>
+          <span>1</span>
+        </div>
+      </button>
+    </div>
+  </div>
+  <hr />
+  <div class="mt-2">
+    <button
+      class="bg-blue-500 w-full p-2 rounded-md hover:bg-blue-300 hover:text-[#3b82f6]"
+    >
+      Add New Task
+    </button>
   </div>
 </section>

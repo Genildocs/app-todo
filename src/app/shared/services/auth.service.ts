@@ -52,11 +52,4 @@ export class AuthService {
     const decodeToken: any = jwtDecode(token);
     return decodeToken;
   }
-
-  isAuthenticated(): boolean {
-    const token = localStorage.getItem('token');
-    if (!token) return false;
-    const isLoggedIn = token;
-    return !!isLoggedIn;
-  }
 }

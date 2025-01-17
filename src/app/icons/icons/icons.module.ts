@@ -10,6 +10,11 @@ import {
   User,
   LogOut,
   Settings,
+  Book,
+  Star,
+  Inbox,
+  Trash,
+  ThumbsUp,
 } from 'angular-feather/icons';
 
 const icons = {
@@ -21,6 +26,11 @@ const icons = {
   User,
   LogOut,
   Settings,
+  Book,
+  Star,
+  Inbox,
+  Trash,
+  ThumbsUp,
 };
 @NgModule({
   declarations: [],

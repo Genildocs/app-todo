@@ -87,12 +87,23 @@
               <p class="mt-1 text-red-500">Please fill the Password</p>
             </ng-container>
           </div>
+          <div class="h-10 flex items-center justify-center">
+            <ng-container *ngIf="CREDENTIALS_ERROR">
+              <p class="text-center text-red-500">
+                Invalid credential. Not authorized!
+              </p>
+            </ng-container>
+          </div>
           <button
             type="submit"
-            class="btn btn-gradient my-8 w-full uppercase border-0 shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]"
+            class="btn bg-white/80 my-3 h-[52px] w-full uppercase border-0 shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)] relative"
             (click)="onSubmit()"
           >
-            Sign in
+            <div
+              class="loader-submit !w-9 h-9 absolute left-5"
+              *ngIf="loading"
+            ></div>
+            <span> Sign in </span>
           </button>
         </form>
         <div class="text-center opacity-70">

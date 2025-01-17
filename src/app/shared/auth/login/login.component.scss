@@ -1,9 +1,28 @@
-.bg-gradient {
-  background: rgb(131, 58, 180);
-  background: linear-gradient(
-    90deg,
-    rgba(131, 58, 180, 1) 0%,
-    rgba(253, 29, 29, 1) 50%,
-    rgba(252, 176, 69, 1) 100%
-  );
+/* HTML: <div class="loader"></div> */
+.loader-submit {
+  width: 40px;
+  aspect-ratio: 1;
+  animation: l3-1 2s infinite linear, l3-2 3s infinite steps(1) -0.5s;
+}
+@keyframes l3-1 {
+  0% {
+    transform: perspective(150px) rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(150px) rotateX(180deg) rotateY(0deg);
+  }
+  100% {
+    transform: perspective(150px) rotateX(180deg) rotateY(180deg);
+  }
+}
+@keyframes l3-2 {
+  0% {
+    background: #ffa516;
+  }
+  33% {
+    background: #f03355;
+  }
+  66% {
+    background: #25b09b;
+  }
 }

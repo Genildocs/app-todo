@@ -1,0 +1,15 @@
+.btn-links-todo {
+  button:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  button {
+    padding: 8px;
+  }
+
+  button:hover {
+    background-color: #dbeafe;
+    color: #3b82f6;
+    border-radius: 6px;
+  }
+}
