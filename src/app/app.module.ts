@@ -9,6 +9,7 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { provideHttpClient } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { RouterLink } from '@angular/router';
+
 @NgModule({
   declarations: [AppComponent, NotFoundComponent],
   imports: [
