@@ -5,12 +5,12 @@ import { environment } from '../../../environments/environment';
 import { Todo } from '../interfaces/todo';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TodoService {
-  private apiUrl = `${environment.apiUrl}/api/todos`;
+  private apiUrl = `${environment.apiUrl}/todos`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getTodos(): Observable<Todo[]> {
     return this.http.get<Todo[]>(this.apiUrl);
@@ -31,4 +31,4 @@ export class TodoService {
   deleteTodo(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
-} 
+}

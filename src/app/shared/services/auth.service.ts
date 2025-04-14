@@ -11,7 +11,7 @@ import { AuthResponse, RegisterUser, TUrlApi, User } from '../interfaces/auth';
 export class AuthService {
   private readonly _httpClient = inject(HttpClient);
   private readonly _router = inject(Router);
-  private urlApi: TUrlApi = 'http://localhost:3000/api';
+  private urlApi: TUrlApi = 'https://notesback-bzcn.onrender.com/api';
 
   constructor() {
     console.log('AuthService inicializado');
