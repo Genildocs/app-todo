@@ -24,6 +24,14 @@ export class ProfileComponent implements OnInit {
     this.isVisible = !this.isVisible;
   }
 
+  redirectUserProfilePage() {
+    this._router.navigate(['todo/profile']);
+  }
+
+  redirectSettingsPage() {
+    this._router.navigate(['todo/settings']);
+  }
+
   singOut() {
     this.authService.logout();
     this._router.navigate(['auth/login']);

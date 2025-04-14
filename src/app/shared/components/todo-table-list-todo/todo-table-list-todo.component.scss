@@ -1,0 +1,49 @@
+:host {
+  display: block;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: inherit;
+}
+
+tr {
+  transition: background-color 0.2s ease-in-out;
+}
+
+td, th {
+  padding: 0.75rem 1.5rem;
+}
+
+input[type="checkbox"] {
+  border-radius: 0.25rem;
+  transition: all 0.2s ease-in-out;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+input[type="checkbox"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+:host-context([data-mode="dark"]) {
+  input[type="checkbox"]:checked {
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+  }
+
+  input[type="checkbox"]:focus {
+    box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.5);
+  }
+}

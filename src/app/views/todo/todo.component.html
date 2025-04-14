@@ -1,0 +1,14 @@
+<div class="min-h-screen bg-gray-100 dark:bg-blue-900">
+  <!-- Header -->
+  <app-header (toggleSidebar)="onToggleSidebar()"></app-header>
+
+  <div class="flex">
+    <!-- Sidebar -->
+    <app-todo-side-bar [isOpen]="isSidebarOpen"></app-todo-side-bar>
+
+    <!-- Main Content -->
+    <main class="flex-1 ml-64 p-6 transition-all duration-300 ease-in-out" [class.ml-0]="!isSidebarOpen">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div> 

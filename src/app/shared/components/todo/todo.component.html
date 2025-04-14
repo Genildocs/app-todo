@@ -1,0 +1,105 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-8">Minhas Tarefas</h1>
+
+  <!-- Formulário de criação -->
+  <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+    <h2 class="text-xl font-semibold mb-4">Nova Tarefa</h2>
+    <form (ngSubmit)="createTodo()" class="space-y-4">
+      <div>
+        <label for="title" class="block text-sm font-medium text-gray-700">Título</label>
+        <input
+          type="text"
+          id="title"
+          [(ngModel)]="newTodo.title"
+          name="title"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+          required
+        >
+      </div>
+      <div>
+        <label for="description" class="block text-sm font-medium text-gray-700">Descrição</label>
+        <textarea
+          id="description"
+          [(ngModel)]="newTodo.description"
+          name="description"
+          rows="3"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+        ></textarea>
+      </div>
+      <button
+        type="submit"
+        class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      >
+        Adicionar Tarefa
+      </button>
+    </form>
+  </div>
+
+  <!-- Lista de tarefas -->
+  <div class="space-y-4">
+    <div *ngFor="let todo of todos" class="bg-white rounded-lg shadow-md p-6">
+      <div *ngIf="editingTodo?.id !== todo.id">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-medium">{{ todo.title }}</h3>
+          <div class="flex space-x-4">
+            <button
+              (click)="startEditing(todo)"
+              class="text-indigo-600 hover:text-indigo-900"
+            >
+              Editar
+            </button>
+            <button
+              (click)="deleteTodo(todo.id!)"
+              class="text-red-600 hover:text-red-900"
+            >
+              Excluir
+            </button>
+          </div>
+        </div>
+        <p class="mt-2 text-gray-600">{{ todo.description }}</p>
+      </div>
+
+      <!-- Formulário de edição -->
+      <form *ngIf="editingTodo" (ngSubmit)="updateTodo(editingTodo)">
+        <div class="space-y-4">
+          <div>
+            <label for="edit-title" class="block text-sm font-medium text-gray-700">Título</label>
+            <input
+              type="text"
+              id="edit-title"
+              [(ngModel)]="editingTodo.title"
+              name="edit-title"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              required
+            >
+          </div>
+          <div>
+            <label for="edit-description" class="block text-sm font-medium text-gray-700">Descrição</label>
+            <textarea
+              id="edit-description"
+              [(ngModel)]="editingTodo.description"
+              name="edit-description"
+              rows="3"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+            ></textarea>
+          </div>
+          <div class="flex space-x-4">
+            <button
+              type="submit"
+              class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Salvar
+            </button>
+            <button
+              type="button"
+              (click)="cancelEditing()"
+              class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> 

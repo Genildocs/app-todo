@@ -1,0 +1,160 @@
+<div class="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <!-- Cabeçalho -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900">Painel Administrativo</h1>
+      <p class="mt-2 text-sm text-gray-600">Gerencie as configurações do sistema</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Card de Informações do Usuário -->
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Informações do Usuário</h2>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Nome</label>
+            <p class="mt-1 text-gray-900">{{ userInfo.name }}</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Email</label>
+            <p class="mt-1 text-gray-900">{{ userInfo.email }}</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Função</label>
+            <p class="mt-1 text-gray-900">{{ userInfo.role }}</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Último Acesso</label>
+            <p class="mt-1 text-gray-900">{{ userInfo.lastAccess }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card de Configurações do Sistema -->
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Configurações do Sistema</h2>
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-medium text-gray-700">Manutenção</h3>
+              <p class="text-sm text-gray-500">Coloque o sistema em modo de manutenção</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input 
+                type="checkbox" 
+                class="sr-only peer" 
+                [checked]="systemSettings.maintenanceMode"
+                (change)="onToggleMaintenanceMode()"
+              >
+              <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+            </label>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-medium text-gray-700">Registro de Logs</h3>
+              <p class="text-sm text-gray-500">Ative o registro detalhado de logs</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input 
+                type="checkbox" 
+                class="sr-only peer"
+                [checked]="systemSettings.loggingEnabled"
+                (change)="onToggleLogging()"
+              >
+              <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+            </label>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-medium text-gray-700">Backup Automático</h3>
+              <p class="text-sm text-gray-500">Configure backup automático do sistema</p>
+            </div>
+            <button 
+              (click)="onConfigureBackup()"
+              class="bg-gray-100 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-200 transition-colors"
+            >
+              Configurar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card de Logs do Sistema -->
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Logs do Sistema</h2>
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-medium text-gray-700">Nível de Log</h3>
+              <p class="text-sm text-gray-500">Configure o nível de detalhamento dos logs</p>
+            </div>
+            <select 
+              class="mt-1 block w-32 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              [value]="systemSettings.logLevel"
+              (change)="onLogLevelChange($event)"
+            >
+              <option>Debug</option>
+              <option>Info</option>
+              <option>Warning</option>
+              <option>Error</option>
+            </select>
+          </div>
+          <div class="mt-4">
+            <button 
+              (click)="onViewLogs()"
+              class="w-full bg-gray-100 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-200 transition-colors"
+            >
+              Visualizar Logs
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card de Alterações de Roles -->
+      <div class="bg-white rounded-lg shadow-md p-6 md:col-span-2 lg:col-span-3">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Gerenciamento de Roles</h2>
+        <div class="space-y-4">
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuário</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role Atual</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nova Role</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                <tr *ngFor="let user of users">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ user.name }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ user.currentRole }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <select 
+                      class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                      [value]="user.currentRole"
+                      (change)="onRoleChange($event, user)"
+                    >
+                      <option>Admin</option>
+                      <option>User</option>
+                      <option>Moderator</option>
+                    </select>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <button 
+                      (click)="onSaveRole(user)"
+                      class="text-blue-600 hover:text-blue-900"
+                    >
+                      Salvar
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

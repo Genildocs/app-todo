@@ -1,0 +1,76 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Minhas Tarefas</h1>
+    <button 
+      class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors"
+      routerLink="/todo/new"
+    >
+      Nova Tarefa
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="flex justify-center items-center h-64">
+    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+    {{ error }}
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!loading && !error && todos.length === 0" class="text-center py-12">
+    <p class="text-gray-500 text-lg">Nenhuma tarefa encontrada</p>
+    <p class="text-gray-400 mt-2">Clique em "Nova Tarefa" para começar</p>
+  </div>
+
+  <!-- Todo List -->
+  <div *ngIf="!loading && !error && todos.length > 0" class="grid gap-4">
+    <div 
+      *ngFor="let todo of todos" 
+      class="todo-card bg-white rounded-lg shadow-md p-4 hover:shadow-lg"
+    >
+      <div class="flex items-center justify-between">
+        <div class="checkbox-container">
+          <input 
+            type="checkbox" 
+            [checked]="todo.completed"
+            (change)="toggleTodoStatus(todo)"
+            class="h-5 w-5 text-blue-500 rounded focus:ring-blue-500"
+          >
+          <span 
+            class="ml-3 text-lg"
+            [class.line-through]="todo.completed"
+            [class.text-gray-400]="todo.completed"
+          >
+            {{ todo.title }}
+          </span>
+        </div>
+        
+        <div class="action-buttons">
+          <button 
+            class="text-red-500 hover:text-red-700 mr-2"
+            (click)="deleteTodo(todo.id!)"
+          >
+            <i class="fas fa-trash"></i>
+          </button>
+          <button 
+            class="text-blue-500 hover:text-blue-700"
+            [routerLink]="['/todo', todo.id, 'edit']"
+          >
+            <i class="fas fa-edit"></i>
+          </button>
+        </div>
+      </div>
+      
+      <p 
+        class="mt-2 text-gray-600"
+        [class.line-through]="todo.completed"
+        [class.text-gray-400]="todo.completed"
+      >
+        {{ todo.description }}
+      </p>
+    </div>
+  </div>
+</div> 

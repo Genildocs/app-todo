@@ -11,7 +11,7 @@ import { AuthResponse, RegisterUser, TUrlApi, User } from '../interfaces/auth';
 export class AuthService {
   private readonly _httpClient = inject(HttpClient);
   private readonly _router = inject(Router);
-  private urlApi: TUrlApi = 'http://localhost:3000/api/v1';
+  private urlApi: TUrlApi = 'http://localhost:3000/api';
 
   constructor() {
     console.log('AuthService inicializado');
@@ -20,19 +20,19 @@ export class AuthService {
   register(register: RegisterUser): Observable<RegisterUser> {
     console.log('Tentando registrar usuário:', register);
     return this._httpClient.post<RegisterUser>(
-      `${this.urlApi}/users/register`,
+      `${this.urlApi}/auth/register`,
       register
     );
   }
 
-  login(user: User): Observable<AuthResponse> {
+  login(user: User[]): Observable<AuthResponse> {
     console.log('Tentando fazer login com:', user);
     return this._httpClient
-      .post<AuthResponse>(`${this.urlApi}/users/login`, user)
+      .post<AuthResponse>(`${this.urlApi}/auth/login`, user)
       .pipe(
         tap((res) => {
-          console.log('Resposta do login:', res, res.token, res.username);
-          if (res.token && res.username) {
+          console.log('Resposta do login:', res, res.token, res.user);
+          if (res.token && res.user) {
             console.log('Token recebido, armazenando...');
             localStorage.setItem('token', res.token);
             console.log('Token armazenado com sucesso');
@@ -55,7 +55,7 @@ export class AuthService {
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     console.log('Headers para verificação:', headers);
 
-    return this._httpClient.get<{ valid: boolean }>(`${this.urlApi}/me`, {
+    return this._httpClient.get<{ valid: boolean }>(`${this.urlApi}/users/me`, {
       headers,
     });
   }

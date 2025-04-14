@@ -1,11 +1,14 @@
 export interface User {
   email: string;
   password: string;
+  username: string;
+  id: string;
+  role: string;
 }
 
 export interface AuthResponse {
   token: string;
-  username: string;
+  user: User[];
 }
 
 export interface RegisterUser {

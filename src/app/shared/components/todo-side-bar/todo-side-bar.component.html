@@ -1,55 +1,98 @@
-<section class="p-5 bg-white shadow-lg dark:bg-blue-950 rounded-md">
-  <div class="mb-2 flex items-center gap-2">
-    <i-feather name="book" class="!h-[20px] !w-[20px]"></i-feather>
-    <h2 class="text-xl font-semibold">Todo list</h2>
+<!-- Botão de Toggle (visível quando a barra está fechada) -->
+<button 
+  *ngIf="!isOpen"
+  (click)="toggleSidebar()"
+  class="fixed left-0 top-1/2 transform -translate-y-1/2 z-50 bg-blue-600 dark:bg-blue-700 text-white p-2 rounded-r-md shadow-md hover:bg-blue-700 dark:hover:bg-blue-800 transition-colors"
+>
+  <i class="fas fa-bars text-xl"></i>
+</button>
+
+<!-- Barra Lateral -->
+<aside 
+  [class]="isOpen ? 'translate-x-0' : '-translate-x-full'"
+  class="fixed left-0 top-0 h-full w-64 bg-white dark:bg-blue-950 shadow-lg transform transition-transform duration-300 ease-in-out z-40"
+>
+  <!-- Cabeçalho da Barra Lateral -->
+  <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+    <div class="flex items-center gap-2">
+      <i class="fas fa-book text-xl text-gray-700 dark:text-gray-300"></i>
+      <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Todo list</h2>
+    </div>
+    <button 
+      (click)="toggleSidebar()"
+      class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+    >
+      <i class="fas fa-times text-xl"></i>
+    </button>
   </div>
-  <hr />
-  <div class="mt-2">
-    <div class="btn-links-todo">
-      <button class="flex items-center justify-between w-full">
-        <div>
-          <i-feather name="Inbox" class="!h-[18px] !w-[18px]"></i-feather>
-          <span>Inbox</span>
+
+  <!-- Conteúdo da Barra Lateral -->
+  <div class="p-4">
+    <div class="space-y-2">
+      <button class="flex items-center justify-between w-full p-2 rounded-md hover:bg-gray-100 dark:hover:bg-blue-900 transition-colors">
+        <div class="flex items-center gap-2">
+          <i class="fas fa-inbox text-gray-700 dark:text-gray-300"></i>
+          <span class="text-gray-900 dark:text-white">Inbox</span>
         </div>
-        <div>
-          <span>1</span>
-        </div>
+        <span class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 text-xs font-medium px-2.5 py-0.5 rounded-full">1</span>
       </button>
-      <button class="flex items-center justify-between w-full">
-        <div>
-          <i-feather name="thumbs-up" class="!h-[18px] !w-[18px]"></i-feather>
-          <span class="links-todo">Done</span>
+
+      <button class="flex items-center justify-between w-full p-2 rounded-md hover:bg-gray-100 dark:hover:bg-blue-900 transition-colors">
+        <div class="flex items-center gap-2">
+          <i class="fas fa-check text-gray-700 dark:text-gray-300"></i>
+          <span class="text-gray-900 dark:text-white">Done</span>
         </div>
-        <div>
-          <span>1</span>
-        </div>
+        <span class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 text-xs font-medium px-2.5 py-0.5 rounded-full">1</span>
       </button>
-      <button class="flex items-center justify-between w-full">
-        <div>
-          <i-feather name="star" class="!h-[18px] !w-[18px]"></i-feather>
-          <span>Important</span>
+
+      <button class="flex items-center justify-between w-full p-2 rounded-md hover:bg-gray-100 dark:hover:bg-blue-900 transition-colors">
+        <div class="flex items-center gap-2">
+          <i class="fas fa-star text-gray-700 dark:text-gray-300"></i>
+          <span class="text-gray-900 dark:text-white">Important</span>
         </div>
-        <div>
-          <span>1</span>
-        </div>
+        <span class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 text-xs font-medium px-2.5 py-0.5 rounded-full">1</span>
       </button>
-      <button class="flex items-center justify-between w-full">
-        <div>
-          <i-feather name="trash" class="!h-[18px] !w-[18px]"></i-feather>
-          <span>Trash</span>
+
+      <button class="flex items-center justify-between w-full p-2 rounded-md hover:bg-gray-100 dark:hover:bg-blue-900 transition-colors">
+        <div class="flex items-center gap-2">
+          <i class="fas fa-trash text-gray-700 dark:text-gray-300"></i>
+          <span class="text-gray-900 dark:text-white">Trash</span>
         </div>
-        <div>
-          <span>1</span>
-        </div>
+        <span class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 text-xs font-medium px-2.5 py-0.5 rounded-full">1</span>
       </button>
     </div>
-  </div>
-  <hr />
-  <div class="mt-2">
+
+    <hr class="my-4 border-gray-200 dark:border-gray-700" />
+
     <button
-      class="bg-blue-500 w-full p-2 rounded-md hover:bg-blue-300 hover:text-[#3b82f6]"
+      (click)="onAddNewTask()"
+      class="bg-blue-600 dark:bg-blue-700 w-full p-2 rounded-md hover:bg-blue-700 dark:hover:bg-blue-800 text-white transition-colors"
     >
       Add New Task
     </button>
   </div>
-</section>
+
+  <!-- Rodapé da Barra Lateral -->
+  <div class="absolute bottom-0 w-full p-4 border-t border-gray-200 dark:border-gray-700">
+    <button 
+      (click)="onLogout()"
+      class="flex items-center gap-2 w-full p-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-blue-900 transition-colors"
+    >
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Sair</span>
+    </button>
+  </div>
+</aside>
+
+<!-- Overlay (visível quando a barra está aberta em mobile) -->
+<div 
+  *ngIf="isOpen"
+  (click)="toggleSidebar()"
+  class="fixed inset-0 bg-gray-500 bg-opacity-50 z-30 md:hidden"
+></div>
+
+<!-- Formulário de Nova Tarefa -->
+<app-todo-form
+  *ngIf="showTodoForm"
+  (todoCreated)="onTodoCreated($event)"
+></app-todo-form>

@@ -17,7 +17,8 @@ import {
   ThumbsUp,
   AtSign,
   Eye,
-  EyeOff
+  EyeOff,
+  Sidebar
 } from 'angular-feather/icons';
 
 const icons = {
@@ -36,7 +37,8 @@ const icons = {
   ThumbsUp,
   AtSign,
   Eye,
-  EyeOff
+  EyeOff,
+  Sidebar
 };
 @NgModule({
   declarations: [],

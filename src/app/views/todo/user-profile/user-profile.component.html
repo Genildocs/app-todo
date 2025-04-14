@@ -1,0 +1,121 @@
+<div class="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto">
+    <!-- Cabeçalho -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900">Perfil do Usuário</h1>
+      <p class="mt-2 text-sm text-gray-600">Gerencie suas informações e preferências</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Card de Informações do Usuário -->
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Informações Pessoais</h2>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Nome</label>
+            <p class="mt-1 text-gray-900">{{ userInfo.name }}</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Email</label>
+            <p class="mt-1 text-gray-900">{{ userInfo.email }}</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Nome de Usuário</label>
+            <p class="mt-1 text-gray-900">{{ userInfo.username }}</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Data de Registro</label>
+            <p class="mt-1 text-gray-900">{{ userInfo.registrationDate }}</p>
+          </div>
+        </div>
+        <button 
+          (click)="onEditProfile()"
+          class="mt-6 w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
+        >
+          Editar Informações
+        </button>
+      </div>
+
+      <!-- Card de Configurações -->
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Configurações</h2>
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-medium text-gray-700">Notificações por Email</h3>
+              <p class="text-sm text-gray-500">Receba atualizações sobre suas tarefas</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input 
+                type="checkbox" 
+                class="sr-only peer" 
+                [checked]="settings.emailNotifications"
+                (change)="onToggleEmailNotifications()"
+              >
+              <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+            </label>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-medium text-gray-700">Modo Escuro</h3>
+              <p class="text-sm text-gray-500">Ative o tema escuro do sistema</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input 
+                type="checkbox" 
+                class="sr-only peer"
+                [checked]="settings.darkMode"
+                (change)="onToggleDarkMode()"
+              >
+              <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+            </label>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-medium text-gray-700">Idioma</h3>
+              <p class="text-sm text-gray-500">Selecione o idioma do sistema</p>
+            </div>
+            <select 
+              class="mt-1 block w-32 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              [value]="settings.language"
+              (change)="onLanguageChange($event)"
+            >
+              <option>Português</option>
+              <option>English</option>
+              <option>Español</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card de Segurança -->
+    <div class="mt-6 bg-white rounded-lg shadow-md p-6">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Segurança</h2>
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-sm font-medium text-gray-700">Alterar Senha</h3>
+          <p class="text-sm text-gray-500">Atualize sua senha regularmente para manter sua conta segura</p>
+          <button 
+            (click)="onChangePassword()"
+            class="mt-2 bg-gray-100 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-200 transition-colors"
+          >
+            Alterar Senha
+          </button>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-gray-700">Autenticação de Dois Fatores</h3>
+          <p class="text-sm text-gray-500">Adicione uma camada extra de segurança à sua conta</p>
+          <button 
+            (click)="onConfigure2FA()"
+            class="mt-2 bg-gray-100 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-200 transition-colors"
+          >
+            Configurar 2FA
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

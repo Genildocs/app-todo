@@ -1,0 +1,31 @@
+.todo-card {
+  transition: all 0.3s ease;
+}
+
+.todo-card:hover {
+  transform: translateY(-2px);
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-buttons button {
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.action-buttons button:hover {
+  transform: scale(1.1);
+}
+
+.line-through {
+  text-decoration: line-through;
+} 

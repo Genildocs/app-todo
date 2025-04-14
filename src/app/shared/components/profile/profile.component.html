@@ -1,5 +1,5 @@
 <div
-  class="p-2 rounded-full bg-slate-300 w-10 h-10 cursor-pointer relative"
+  class="relative w-10 h-10 p-2 rounded-full cursor-pointer bg-slate-300"
   (click)="toggleProfile()"
 >
   <div>
@@ -20,7 +20,8 @@
     <ul>
       <li>
         <a
-          class="flex items-center gap-2 text-sm font-semibold text-black dark:text-white hover:bg-blue-100 hover:text-blue-400 p-1"
+          class="flex items-center gap-2 p-1 text-sm font-semibold text-black dark:text-white hover:bg-blue-100 hover:text-blue-400"
+          (click)="redirectUserProfilePage()"
         >
           <i-feather name="user" class="!h-[18px] !w-[18px]"></i-feather>
           Profile</a
@@ -28,7 +29,8 @@
       </li>
       <li>
         <a
-          class="flex items-center gap-2 text-sm font-semibold text-black dark:text-white hover:bg-blue-100 hover:text-blue-400 p-1"
+          class="flex items-center gap-2 p-1 text-sm font-semibold text-black dark:text-white hover:bg-blue-100 hover:text-blue-400"
+          (click)="redirectSettingsPage()"
         >
           <i-feather name="settings" class="!h-[18px] !w-[18px]"></i-feather>
           Settings</a
@@ -37,7 +39,7 @@
       <hr />
       <li>
         <a
-          class="flex items-center gap-2 text-sm font-semibold text-red-500 hover:bg-blue-100 hover:text-blue-400 p-1 mt-1"
+          class="flex items-center gap-2 p-1 mt-1 text-sm font-semibold text-red-500 hover:bg-blue-100 hover:text-blue-400"
           (click)="singOut()"
         >
           <i-feather name="log-out" class="!h-[18px] !w-[18px]"></i-feather>
